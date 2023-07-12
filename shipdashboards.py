@@ -34,9 +34,9 @@ collection = "default" # replace with your collection
 
 # Initialize the collection within the immudb vault
 payload = {
-    "fields": [{"name": "uid", "type": "INTEGER"}, {"name": "title", "type": "STRING"},{"name": "dashboard", "type": "STRING"}],
+    "fields": [{"name": "uid", "type": "STRING"}, {"name": "title", "type": "STRING"}],
     "idFieldName": "_id",
-    "indexes": [{"fields": ["uid", "title"], "isUnique": True}]
+    "indexes": [{"fields": ["uid"], "isUnique": True}]
 }
 # ignore for now as the endpoint is currently disabled
 r = s.put(f"https://vault.immudb.io/ics/api/v1/ledger/{ledger}/collection/{collection}", json=payload)
@@ -71,4 +71,3 @@ for db in dashboards:
     print(db['uid'], json_data['dashboard']['title'])
     print(inserted.status_code)
     assert inserted.status_code == 200
-
