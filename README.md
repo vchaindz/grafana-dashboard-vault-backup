@@ -12,7 +12,7 @@ This script allows you to back up all Grafana dashboards by sending their data t
 ## Usage
 
 ```bash
-python backup_grafana_dashboards.py --url <grafana_url> --api_key <grafana_api_key> --vault_api_key <immudb_vault_api_key>
+python shipdashboards.py --url <grafana_url> --api_key <grafana_api_key> --vault_api_key <immudb_vault_api_key>
 ```
 
 Replace `<grafana_url>` with the URL of your Grafana instance, `<grafana_api_key>` with your Grafana API Key, and `<immudb_vault_api_key>` with your immudb Vault API Key.
