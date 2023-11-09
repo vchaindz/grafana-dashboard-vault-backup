@@ -14,7 +14,7 @@ on:
 
 jobs:
   sbom_scan:
-    uses: sbom.sh/sbom.sh-sbom@v1
+    uses: codenotary/sbom.sh-create@v1
     with:
       scan_type: ${{ github.event.inputs.scan_type }}
       target: ${{ github.event.inputs.target }}
