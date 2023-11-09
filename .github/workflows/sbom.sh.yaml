@@ -16,10 +16,9 @@ jobs:
           RESPONSE=$(docker run --rm -v ${{ github.workspace }}:/app codenotary/sbom.sh:latest grypefs)
           echo "SBOM_RESPONSE=$RESPONSE" >> $GITHUB_ENV
       
-      - name: Extract ShareUrl
+      - name: Set ShareUrl
         run: |
-          SHARE_URL=$(echo $SBOM_RESPONSE | jq -r '.ShareUrl')
-          echo "SBOM_SHARE_URL=$SHARE_URL" >> $GITHUB_ENV
+          echo "SBOM_SHARE_URL=${SBOM_RESPONSE}" >> $GITHUB_ENV
       
       - name: Output SBOM URL
         run: echo "The SBOM can be found at $SBOM_SHARE_URL"    
