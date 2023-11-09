@@ -1,21 +1,20 @@
-name: SBOM Analysis Workflow
+name: "Generate and Upload SBOM"
 
-on:
-  workflow_dispatch:
-    inputs:
-      scan_type:
-        description: 'Type of scan (trivyfs, trivyimage, grypefs, grypeimage, syftfs, syftimage)'
-        required: true
-        default: 'grypefs'
-      target:
-        description: 'Scan target (applicable for image scans)'
-        required: false
-        default: ''
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  sbom_scan:
-    uses: codenotary/sbom.sh-create@v1
-    with:
-      scan_type: ${{ github.event.inputs.scan_type }}
-      target: ${{ github.event.inputs.target }}
+  generate_sbom:
+    runs-on: ubuntu-latest
+    name: "SBOM Generation"
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Generate SBOM
+        uses: sbom-to-sbom-sh@v1
+        with:
+          scan_type: 'grypefs' # Or other supported types like 'trivyfs', 'syftfs', etc.
+      
+      - name: Output SBOM URL
+        run: echo "The SBOM can be found at ${{ steps.sbom_generation.outputs.sbom_url }}"
 
