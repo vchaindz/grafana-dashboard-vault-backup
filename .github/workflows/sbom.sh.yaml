@@ -15,7 +15,7 @@ jobs:
         uses: codenotary/sbom.sh-create@main
         with:
           scan_type: 'grypefs'
-          target: '/github/workspace' # Assuming you want to scan the entire repository
+          target: '.' # Assuming you want to scan the entire repository
       
       - name: Output SBOM URL
         run: echo "The SBOM can be found at ${{ steps.sbom_generation.outputs.sbom_url }}"
